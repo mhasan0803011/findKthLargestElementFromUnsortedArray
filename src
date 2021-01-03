@@ -1,0 +1,62 @@
+// Problem statement:Find the k-th largest element from an unsorted array
+// input is Array and k, function should return k-th largest element from Array
+// the below solution is O(nlogk) time and O(k) space complexity 
+
+#include <stdio.h>
+#include <iostream>
+#include <vector>
+#include <bits/stdc++.h>
+using namespace std;
+
+int findKthLargestElem(vector <int>& nums, int k){
+    int len = nums.size();
+    if (len<=0){
+        cout << "Original Array is Empty: " ;
+        return 0;
+    }
+    
+    // if k==0, we should return invalid input since k is the rank of higherst number 
+    if (k==0){
+        cout << " Invalid input of k: ";
+        return 0;
+    }
+    
+    // in this case, k>0, so we should construct similiar min heap 
+    int heap_size = k;
+        
+    priority_queue <int, vector<int>, greater<int>> pq;
+    for (int i=0; i<len; i++){
+        // if the size of minimum heap is less than k, then we should keep pushing nums[i] 
+        if (pq.size()<=heap_size){
+            pq.push(nums[i]);
+        }
+        
+        // if the size of min heap is over than k, we should keep check the top element of min heap 
+        // if the top element is smaller than current value of nums[i], then we should update the top element with nums[i]
+        else {
+            int min_elem = pq.top();
+            if (min_elem<nums[i]){
+                pq.pop();
+                pq.push(nums[i]);
+            }
+        }
+    }
+    return pq.top();
+}
+
+// driver code 
+int main()
+{
+    cout << "********* Test Case 1 ***************" << endl;
+    vector <int> test1{};
+    cout << findKthLargestElem(test1, 2) <<endl;
+    
+    cout << "********* Test Case 2 ***************" << endl;
+    vector <int> test2{1, 5, 6, 4};
+    cout << findKthLargestElem(test2, 1) <<endl;
+    
+    cout << "********* Test Case 3 ***************" << endl;
+    cout << findKthLargestElem(test2, 0) <<endl;
+
+    return 0;
+}
