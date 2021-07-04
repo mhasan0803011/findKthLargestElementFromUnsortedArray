@@ -59,7 +59,10 @@ int main()
     cout << findKthLargestElem(test2, 0) <<endl;
 
     cout << "********* Test Case 4 ***************" << endl;
-    cout << findKthLargestElem(test2, 3) <<endl;    
+    cout << findKthLargestElem(test2, 3) <<endl;   
+    
+    cout << "********* Test Case 5 ***************" << endl;
+    cout << findKthLargestElem(test2, 4) <<endl;  
 
     return 0;
 }
